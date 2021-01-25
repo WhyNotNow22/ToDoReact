@@ -1,0 +1,15 @@
+.TodoContainer {
+    margin: 5vh 5vw;
+    padding: 3vh 3vw;
+    background-color: rgba(101, 244, 11, 0.8);
+    border: 1px solid rgb(7, 138, 0);
+    border-radius: 20px;
+    min-height: 90vh;
+    display: grid;
+    grid-template-areas: 
+    'InputField AddButton'
+    'TodoList TodoList';
+    grid-template-rows: 1fr 6fr;
+    grid-template-columns: 5fr 1fr;
+    
+}

@@ -1,0 +1,7 @@
+.InputField {
+    grid-area: InputField;
+    border-radius: 20px;
+    margin-right: 3vw;
+    outline: none;
+    font-size: 1.8em;
+}

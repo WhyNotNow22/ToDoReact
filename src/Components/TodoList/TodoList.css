@@ -1,0 +1,7 @@
+.TodoList {
+    grid-area: TodoList;
+    border: 2px solid rgb(7, 138, 0);
+    border-radius: 20px;
+    margin-top: 3vh;
+    padding: 3vh 3vw;
+}
