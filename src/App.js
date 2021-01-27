@@ -1,10 +1,10 @@
 import React from 'react'
-import TodoContainer from './Components/TodoContainer/TodoContainer'
+import TodoList from './Components/TodoList/TodoList'
 
 
 function App() {
   return (
-    <TodoContainer />
+    <TodoList />
   );
 }
 

@@ -1,20 +1,18 @@
-import React from 'react'
-import './TodoItem.css'
-import ItemButton from '../ItemButton/ItemButton'
+import React from 'react';
+import './TodoItem.css';
 
-
-function TodoItem() {
+function TodoItem({ deleteTask, raiseTask, dropTask, title }) {
   return (
     <div className='TodoItem'>
-       <p>Text</p>
-       <div className='ButtonsContainer'>
-            <ItemButton type='∆' color='blue'/>
-            <ItemButton type='✎' color='black'/>
-            <ItemButton type='∇' color='blue'/>
-            <ItemButton type='✕' color='red'/>
-       </div>
+      <p>{title}</p>
+      <div className='ButtonsContainer'>
+        <span className='Move' onClick={raiseTask}>∆</span>
+        <span className='Change'>✎</span>
+        <span className='Move' onClick={dropTask}>∇</span>
+        <span className='Delete' onClick={deleteTask}>✕</span>
+      </div>
     </div>
   );
-}
+};
 
 export default TodoItem;
