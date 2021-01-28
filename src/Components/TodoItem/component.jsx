@@ -1,43 +1,62 @@
-import React from 'react';
-import './style.css';
+import React from 'react'
+import './style.css'
 
 class TodoItem extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      input: props.title,
+      textAreaTitle: props.title,
       changeStatus: false,
     };
-  };
+  }
 
-  changeTask = (event) => {
-    this.setState({ changeStatus: true });
-  };
+  changeTask = event => {
+    const { changeStatus } = this.state;
+    if (changeStatus) {
+      this.setState({ changeStatus: false })
+    } else {
+      this.setState({ changeStatus: true });
+      let task = event.target.closest('DIV').previousElementSibling;
+      task.focus();
+      task.style.height = `${task.scrollHeight}px`;
+      task.closest('DIV').style.border = '2px solid black';
+    }
+  }
 
-  stopChange = (event) => {
+  stopChange = event => {
+    event.target.closest('DIV').style.border = '1px solid green';
+    event.target.style.height = 'inherit';
     this.setState({ changeStatus: false });
-  };
+  }
 
   change = event => {
-    if(this.state.changeStatus) 
-      this.setState({ input: event.target.value });
-  };
+    this.openTask(event);
+    if (this.state.changeStatus) {
+      this.setState({ textAreaTitle: event.target.value });
+    }
+  }
 
-  render(){
-    const   { deleteTask, raiseTask, dropTask } = this.props;
+  openTask = event => {
+    event.target.style.height = 'inherit';
+    event.target.style.height = `${event.target.scrollHeight}px`;
+  }
+
+  render() {
+    const { deleteTask, moveTask } = this.props;
+    const { textAreaTitle } = this.state;
     return (
       <div className='TodoItem'>
-        <textarea  className='Title' value={this.state.input} onChange={this.change} onBlur={this.stopChange} />
+        <textarea className='Title' value={textAreaTitle} onClick={this.openTask} onChange={this.change} onBlur={this.stopChange} />
         <div className='ButtonsContainer'>
-          <span className='Move' onClick={raiseTask}>∆</span>
+          <span className='Move' onClick={moveTask}>∆</span>
           <span className='Change' onClick={this.changeTask}>✎</span>
-          <span className='Move' onClick={dropTask}>∇</span>
+          <span className='Move' onClick={moveTask}>∇</span>
           <span className='Delete' onClick={deleteTask}>✕</span>
         </div>
       </div>
-    );
+    )
   }
-};
+}
 
-export default TodoItem;
+export default TodoItem

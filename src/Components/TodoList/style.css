@@ -5,6 +5,7 @@
     border: 1px solid rgb(7, 138, 0);
     border-radius: 20px;
     min-height: 90vh;
+    min-width: 600px;
 }
 
 .TodoList {

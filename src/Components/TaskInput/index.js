@@ -1,3 +1,3 @@
-import TaskInput from './component';
+import TaskInput from './component'
 
-export default TaskInput;
+export default TaskInput

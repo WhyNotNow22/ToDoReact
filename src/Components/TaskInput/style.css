@@ -1,7 +1,7 @@
 .TaskInput {
     display:flex;
     justify-content: space-between;
-    min-height: 50px;
+    height: 80px;
 }
 
 .AddButton {
@@ -18,7 +18,10 @@
     border-radius: 20px;
     margin-right: 3vw;
     outline: none;
+    resize: none;
+    overflow: hidden;
     font-size: 1.8em;
     flex-basis: 80%;
+    max-height: 80px;
 }
 
