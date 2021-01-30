@@ -26,31 +26,31 @@ class TodoList extends React.Component {
     const index = this.state.tasks.map(task => task.id).indexOf(id);
     this.setState(state => {
       let { tasks } = state;
-      let arr = [...tasks];
-      if (event.target.innerHTML === '∆' && arr[index - 1]) {
-        [arr[index - 1], arr[index]] = [arr[index], arr[index - 1]];
+      let movedTasks = [...tasks];
+      if (event.target.innerHTML === '∆' && movedTasks[index - 1]) {
+        [movedTasks[index - 1], movedTasks[index]] = [movedTasks[index], movedTasks[index - 1]];
       }
-      if (event.target.innerHTML === '∇' && arr[index + 1]) {
-        [arr[index + 1], arr[index]] = [arr[index], arr[index + 1]];
+      if (event.target.innerHTML === '∇' && movedTasks[index + 1]) {
+        [movedTasks[index + 1], movedTasks[index]] = [movedTasks[index], movedTasks[index + 1]];
       }
       return {
-        tasks: arr,
+        tasks: movedTasks,
       }
     })
   }
 
-  addTask = task => {
+  addTask = (task, messageHeight) => {
     this.setState(state => {
       let { tasks } = state;
-      const newTasks = [
-        {
-          id: Date.now(),
-          title: task,
-        },
-        ...tasks,
-      ]
       return {
-        tasks: newTasks,
+        tasks: [
+          {
+            id: Date.now(),
+            title: task,
+            height: messageHeight,
+          },
+          ...tasks,
+        ],
       }
     })
   }
@@ -58,15 +58,16 @@ class TodoList extends React.Component {
   render() {
     const { tasks } = this.state;
     return (
-      <div className='AppContainer'>
+      <div className='app-container'>
         <TaskInput addTask={this.addTask} />
-        <div className='TodoList'>
+        <div className='todo-list'>
           {tasks.map(task =>
             <TodoItem
               deleteTask={this.deleteTask(task.id)}
               moveTask={this.moveTask(task.id)}
               title={task.title}
               key={task.id}
+              height={task.height}
             />
           )}
         </div>

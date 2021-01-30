@@ -1,14 +1,12 @@
-.AppContainer {
+.app-container {
     margin: 5vh 5vw;
     padding: 3vh 3vw;
-    background-color: rgba(101, 244, 11, 0.8);
-    border: 1px solid rgb(7, 138, 0);
-    border-radius: 20px;
     min-height: 90vh;
     min-width: 600px;
+    border: 2px solid black;
 }
 
-.TodoList {
+.todo-list {
     margin-top: 3vh;
     padding: 3vh 3vw;
 }

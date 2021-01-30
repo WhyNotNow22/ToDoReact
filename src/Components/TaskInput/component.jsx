@@ -12,33 +12,31 @@ class TaskInput extends React.Component {
     };
   }
 
-  addTask = () => {
+  addTask = event => {
     const { input } = this.state;
     const { addTask } = this.props;
+    const height = event.target.previousElementSibling.scrollHeight;
     if (input) {
-      addTask(input);
+      addTask(input, height);
       this.setState({ input: '' });
     }
   }
 
-  // enterAdd = event => {
-  //   if (event.key === 'Enter') {
-  //     this.addTask();
-  //   }
-  // }
-
   inputChange = event => {
-    event.target.style.height = 'inherit';
-    event.target.style.height = `${event.target.scrollHeight}px`;
     this.setState({ input: event.target.value });
   }
 
   render() {
     const { input } = this.state;
     return (
-      <div className='TaskInput'>
-        <textarea value={input} onKeyPress={this.enterAdd} onChange={this.inputChange} className='InputField' />
-        <button onClick={this.addTask} className='AddButton'>Apply</button>
+      <div className='task-input'>
+        <textarea
+          className='input-field'
+          value={input}
+          onKeyPress={this.enterAdd}
+          onChange={this.inputChange}
+        />
+        <button className='add-button' onClick={this.addTask}>Apply</button>
       </div>
     )
   }

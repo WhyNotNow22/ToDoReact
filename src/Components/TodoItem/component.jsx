@@ -12,47 +12,43 @@ class TodoItem extends React.Component {
   }
 
   changeTask = event => {
-    const { changeStatus } = this.state;
-    if (changeStatus) {
-      this.setState({ changeStatus: false })
-    } else {
-      this.setState({ changeStatus: true });
-      let task = event.target.closest('DIV').previousElementSibling;
-      task.focus();
-      task.style.height = `${task.scrollHeight}px`;
-      task.closest('DIV').style.border = '2px solid black';
-    }
+    this.setState({ changeStatus: true });
+    let task = event.target.closest('DIV').previousElementSibling;
+    task.closest('DIV').style.border = '2px solid orange';
+    task.focus();
   }
 
   stopChange = event => {
-    event.target.closest('DIV').style.border = '1px solid green';
-    event.target.style.height = 'inherit';
+    event.target.closest('DIV').style.border = '2px solid green';
     this.setState({ changeStatus: false });
   }
 
   change = event => {
-    this.openTask(event);
+    event.target.style.height = 'inherit';
+    event.target.style.height = `${event.target.scrollHeight}px`;
     if (this.state.changeStatus) {
       this.setState({ textAreaTitle: event.target.value });
     }
   }
 
-  openTask = event => {
-    event.target.style.height = 'inherit';
-    event.target.style.height = `${event.target.scrollHeight}px`;
-  }
-
   render() {
-    const { deleteTask, moveTask } = this.props;
-    const { textAreaTitle } = this.state;
+    const { deleteTask, moveTask, height } = this.props;
+    const { textAreaTitle, changeStatus } = this.state;
     return (
-      <div className='TodoItem'>
-        <textarea className='Title' value={textAreaTitle} onClick={this.openTask} onChange={this.change} onBlur={this.stopChange} />
-        <div className='ButtonsContainer'>
-          <span className='Move' onClick={moveTask}>∆</span>
-          <span className='Change' onClick={this.changeTask}>✎</span>
-          <span className='Move' onClick={moveTask}>∇</span>
-          <span className='Delete' onClick={deleteTask}>✕</span>
+      <div className='todo-item'>
+        <textarea
+          readOnly={!changeStatus}
+          className='title'
+          value={textAreaTitle}
+          style={{ height: `${height}px` }}
+          onChange={this.change}
+          onBlur={this.stopChange}
+        />
+        <div className='buttons-container'>
+          <span className='move' onClick={moveTask}>∆</span>
+          <span className='change' onClick={this.changeTask}>✎</span>
+          <span className='move' onClick={moveTask}>∇</span>
+          <span className='delete' onClick={deleteTask}>✕</span>
         </div>
       </div>
     )
