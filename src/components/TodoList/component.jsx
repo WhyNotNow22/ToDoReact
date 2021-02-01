@@ -10,9 +10,10 @@ function TodoList(props) {
         <TodoItemContainer
           deleteTask={deleteTask(task.id)}
           moveTask={moveTask(task.id)}
-          openTask={openTask(task.id, task.title)}
+          openTask={openTask}
           title={task.title}
           key={task.id}
+          id={task.id}
           height={task.height}
         />
       )}

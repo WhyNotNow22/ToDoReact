@@ -5,7 +5,6 @@ import './style.css'
 class TodoItemContainer extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       textAreaTitle: props.title,
       changeStatus: false,
@@ -33,7 +32,7 @@ class TodoItemContainer extends React.Component {
   }
 
   render() {
-    const { deleteTask, moveTask, openTask, height } = this.props;
+    const { deleteTask, moveTask, openTask, height , id} = this.props;
     const { textAreaTitle, changeStatus } = this.state;
     return (
       <TodoItem
@@ -42,7 +41,7 @@ class TodoItemContainer extends React.Component {
         style={{ height: `${height}px` }}
         onChange={this.change}
         onBlur={this.stopChange}
-        onClick={openTask}
+        onClick={openTask(id ,textAreaTitle)}
         moveTask={moveTask}
         changeTask={this.changeTask}
         deleteTask={deleteTask}

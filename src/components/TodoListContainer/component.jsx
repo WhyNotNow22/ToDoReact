@@ -5,8 +5,8 @@ import { TODO_ITEM_URL } from '../../constants/routers'
 import './style.css'
 
 class TodoListContainer extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       tasks: [],
     };
@@ -24,8 +24,8 @@ class TodoListContainer extends React.Component {
   moveTask = id => (event) => {
     const index = this.state.tasks.map(task => task.id).indexOf(id);
     this.setState(state => {
-      let { tasks } = state;
-      let movedTasks = [...tasks];
+      const { tasks } = state;
+      const movedTasks = [...tasks];
       if (event.target.innerHTML === '∆' && movedTasks[index - 1]) {
         [movedTasks[index - 1], movedTasks[index]] = [movedTasks[index], movedTasks[index - 1]];
       }
@@ -40,7 +40,7 @@ class TodoListContainer extends React.Component {
 
   addTask = (task, messageHeight) => {
     this.setState(state => {
-      let { tasks } = state;
+      const { tasks } = state;
       return {
         tasks: [
           {
@@ -59,7 +59,7 @@ class TodoListContainer extends React.Component {
       const { history } = this.props;
       history.push({
         pathname: `${TODO_ITEM_URL}/${id}`,
-        state: { title },
+        state: { title: title },
       })
     }
   }
@@ -69,7 +69,11 @@ class TodoListContainer extends React.Component {
     return (
       <div className='app-container'>
         <TaskInput addTask={this.addTask} />
-        <TodoList openTask={this.openTask} deleteTask={this.deleteTask} moveTask={this.moveTask} tasks={tasks} />
+        <TodoList
+          openTask={this.openTask}
+          deleteTask={this.deleteTask}
+          moveTask={this.moveTask}
+          tasks={tasks} />
       </div>
     )
   }
