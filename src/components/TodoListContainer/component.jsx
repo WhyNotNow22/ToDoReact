@@ -1,13 +1,12 @@
 import React from 'react'
-import TodoItem from '../TodoItem'
 import TaskInput from '../TaskInput'
+import TodoList from '../TodoList'
+import { TODO_ITEM_URL } from '../../constants/routers'
 import './style.css'
 
-
-class TodoList extends React.Component {
-  constructor() {
-    super();
-
+class TodoListContainer extends React.Component {
+  constructor(props) {
+    super(props);
     this.state = {
       tasks: [],
     };
@@ -55,25 +54,25 @@ class TodoList extends React.Component {
     })
   }
 
+  openTask = (id, title) => (event) => {
+    if (event.target.readOnly) {
+      const { history } = this.props;
+      history.push({
+        pathname: `${TODO_ITEM_URL}/${id}`,
+        state: { title },
+      })
+    }
+  }
+
   render() {
     const { tasks } = this.state;
     return (
       <div className='app-container'>
         <TaskInput addTask={this.addTask} />
-        <div className='todo-list'>
-          {tasks.map(task =>
-            <TodoItem
-              deleteTask={this.deleteTask(task.id)}
-              moveTask={this.moveTask(task.id)}
-              title={task.title}
-              key={task.id}
-              height={task.height}
-            />
-          )}
-        </div>
+        <TodoList openTask={this.openTask} deleteTask={this.deleteTask} moveTask={this.moveTask} tasks={tasks} />
       </div>
     )
   }
 }
 
-export default TodoList
+export default TodoListContainer

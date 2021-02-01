@@ -33,7 +33,6 @@ class TaskInput extends React.Component {
         <textarea
           className='input-field'
           value={input}
-          onKeyPress={this.enterAdd}
           onChange={this.inputChange}
         />
         <button className='add-button' onClick={this.addTask}>Apply</button>

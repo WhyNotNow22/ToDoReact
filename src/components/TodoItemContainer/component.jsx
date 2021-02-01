@@ -1,7 +1,8 @@
 import React from 'react'
+import TodoItem from '../TodoItem'
 import './style.css'
 
-class TodoItem extends React.Component {
+class TodoItemContainer extends React.Component {
   constructor(props) {
     super(props);
 
@@ -32,27 +33,22 @@ class TodoItem extends React.Component {
   }
 
   render() {
-    const { deleteTask, moveTask, height } = this.props;
+    const { deleteTask, moveTask, openTask, height } = this.props;
     const { textAreaTitle, changeStatus } = this.state;
     return (
-      <div className='todo-item'>
-        <textarea
-          readOnly={!changeStatus}
-          className='title'
-          value={textAreaTitle}
-          style={{ height: `${height}px` }}
-          onChange={this.change}
-          onBlur={this.stopChange}
-        />
-        <div className='buttons-container'>
-          <span className='move' onClick={moveTask}>∆</span>
-          <span className='change' onClick={this.changeTask}>✎</span>
-          <span className='move' onClick={moveTask}>∇</span>
-          <span className='delete' onClick={deleteTask}>✕</span>
-        </div>
-      </div>
+      <TodoItem
+        readOnly={!changeStatus}
+        value={textAreaTitle}
+        style={{ height: `${height}px` }}
+        onChange={this.change}
+        onBlur={this.stopChange}
+        onClick={openTask}
+        moveTask={moveTask}
+        changeTask={this.changeTask}
+        deleteTask={deleteTask}
+      />
     )
   }
 }
 
-export default TodoItem
+export default TodoItemContainer

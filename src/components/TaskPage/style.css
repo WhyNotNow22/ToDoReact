@@ -1,0 +1,23 @@
+.task-page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.task-page {
+    margin: 3vh 3vw;
+    font-size: 1.7em;
+    padding: 5vh 5vw;
+    border: 2px solid green;
+    border-radius: 10px;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+.prev-page-button {
+    font-size: 1.5em;
+    width: fit-content;
+    border: 2px solid black;
+    background-color: rgb(7, 138, 0);
+    outline: none;
+}
