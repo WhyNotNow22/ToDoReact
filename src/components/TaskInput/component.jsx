@@ -1,6 +1,6 @@
 import React from 'react'
+import { Button, Input } from 'antd';
 import './style.css'
-
 
 class TaskInput extends React.Component {
 
@@ -14,9 +14,8 @@ class TaskInput extends React.Component {
   addTask = event => {
     const { input } = this.state;
     const { addTask } = this.props;
-    const height = event.target.previousElementSibling.scrollHeight;
     if (input) {
-      addTask(input, height);
+      addTask(input);
       this.setState({ input: '' });
     }
   }
@@ -27,14 +26,17 @@ class TaskInput extends React.Component {
 
   render() {
     const { input } = this.state;
+    const { TextArea } = Input;
     return (
       <div className='task-input'>
-        <textarea
-          className='input-field'
+        <TextArea
+          placeholder='Enter new task...'
+          id='input-text-area'
+          size="large"
           value={input}
           onChange={this.inputChange}
         />
-        <button className='add-button' onClick={this.addTask}>Apply</button>
+        <Button className='add-button' type="primary" onClick={this.addTask}>Apply</Button>
       </div>
     )
   }

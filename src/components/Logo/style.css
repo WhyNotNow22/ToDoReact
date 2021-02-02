@@ -1,0 +1,9 @@
+.logo {
+    flex-basis: 5%;
+    color: #1890ff;
+    font-size: 18px;
+    height: 18px;
+    line-height: 20px;
+    font-family: fantasy;
+    font-weight: bold;
+}

@@ -1,24 +1,33 @@
 import React from 'react'
+import { Button, Input } from 'antd'
+import {
+  UpCircleOutlined,
+  DownCircleOutlined,
+  CloseCircleOutlined,
+  EditOutlined
+} from '@ant-design/icons';
 import './style.css'
 
 function TodoItem(props) {
-  const {readOnly, value, style, onChange, onBlur, moveTask, changeTask, deleteTask , onClick} = props;
+  const { readOnly, value, onChange, onBlur, moveTask, changeTask, deleteTask, onClick } = props;
+  const { TextArea } = Input;
   return (
     <div className='todo-item'>
-    <textarea
-        readOnly={readOnly}
+      <TextArea
         className='title'
+        autoSize
+        bordered={false}
         value={value}
-        style={style}
+        readOnly={readOnly}
         onChange={onChange}
         onBlur={onBlur}
         onClick={onClick}
       />
       <div className='buttons-container'>
-        <span className='move' onClick={moveTask}>∆</span>
-        <span className='change' onClick={changeTask}>✎</span>
-        <span className='move' onClick={moveTask}>∇</span>
-        <span className='delete' onClick={deleteTask}>✕</span>
+        <Button className='move' icon={<UpCircleOutlined />} onClick={moveTask} />
+        <Button className='change' icon={<EditOutlined />} onClick={changeTask} />
+        <Button className='move' icon={<DownCircleOutlined />} onClick={moveTask} />
+        <Button className='delete' icon={<CloseCircleOutlined />} onClick={deleteTask} />
       </div>
     </div>
   )

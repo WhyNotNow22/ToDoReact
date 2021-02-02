@@ -4,7 +4,6 @@ import TodoListContainer from './components/TodoListContainer'
 import TaskPage from './components/TaskPage'
 import { BASE_URL, TODO_ITEM_URL } from './constants/routers';
 
-
 function App() {
   return (
     <Router>

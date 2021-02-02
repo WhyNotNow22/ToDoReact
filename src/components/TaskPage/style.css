@@ -6,18 +6,16 @@
 
 .task-page {
     margin: 3vh 3vw;
+    padding: 2vh 2vw;
+    max-width: 80vw;
+    min-height: 80vh;
+    min-width: 90vw;
     font-size: 1.7em;
-    padding: 5vh 5vw;
-    border: 2px solid green;
+    border: 2px solid #001529;
     border-radius: 10px;
+    background-color: rgba(0, 21, 41, 0.1);
+    box-shadow: 0.5vh 0.5vw  rgba(0, 21, 41, 0.6);
     word-wrap: break-word;
     white-space: pre-wrap;
 }
 
-.prev-page-button {
-    font-size: 1.5em;
-    width: fit-content;
-    border: 2px solid black;
-    background-color: rgb(7, 138, 0);
-    outline: none;
-}

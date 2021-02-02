@@ -4,35 +4,68 @@
     justify-content: space-between;
     margin-bottom: 2vh;
     padding: 1vh 1vw;
-    border: 2px solid green;
-    border-radius: 20px;
+    border: 2px solid #001529;
+    border-radius: 10px;
+    background-color: rgba(0, 21, 41, 0.1);
+    box-shadow: 0.5vh 0.5vw  rgba(0, 21, 41, 0.6);
 }
 
 .title {
-    width: 85%;
-    font-size: 1.7em;
-    border: none;
-    outline: none;
     resize : none;
-    overflow: hidden;
 }
 
 .buttons-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-    font-size: 1.5em;
-    cursor: pointer;
+    grid-column-gap: 0.5vh;
+    grid-row-gap: 0.5vw;
 }
 
-.change {
-    color: black;
+.buttons-container button {
+    background-color: rgba(0, 21, 41, 0.2);
+    border-radius: 1vh;
 }
 
-.move {
-    color: blue;
+.buttons-container button:hover,
+.buttons-container button:active,
+.buttons-container button:focus  {
+    background: rgba(0, 21, 41, 0.2);
+    border-color: rgba(0, 21, 41, 0.2);
+    color: rgb(0, 21, 41);
 }
 
-.delete {
+.buttons-container button.delete:hover {
+    border-color: red;
     color: red;
+}
+
+.buttons-container button.change:hover {
+    border-color: rgb(0, 21, 41);
+    color: rgb(0, 21, 41);
+}
+
+.buttons-container button.move:hover {
+    border-color: #1890ff;
+    color: #1890ff;
+}
+
+@media all and (max-width: 575px) {
+    .todo-item {
+        flex-direction: column;
+    }
+  
+    .buttons-container {
+        display: flex; 
+        justify-content: space-between;
+        width: 30vw;
+    }
+
+    .buttons-container button {
+        display: contents;
+    }
+
+    .buttons-container button span{
+        font-size: 14px;
+    }
 }

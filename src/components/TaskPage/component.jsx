@@ -1,4 +1,5 @@
 import React from 'react'
+import { Button } from 'antd'
 import '../../constants/routers'
 import { BASE_URL } from '../../constants/routers'
 import './style.css'
@@ -16,7 +17,7 @@ function TaskPage({ location, history}) {
       <div className='task-page'>
         {location.state ? location.state.title : 'Wrong address!'}
       </div>
-      <button className='prev-page-button' onClick={prevPage(history)}>Go to TaskList</button>
+      <Button className='prev-page-button' onClick={prevPage(history)} type='primary'>Go to TaskList</Button>
     </div>
   )
 }

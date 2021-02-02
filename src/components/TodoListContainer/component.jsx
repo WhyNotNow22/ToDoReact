@@ -1,7 +1,10 @@
 import React from 'react'
+import { Layout } from 'antd'
 import TaskInput from '../TaskInput'
 import TodoList from '../TodoList'
+import Logo from '../Logo'
 import { TODO_ITEM_URL } from '../../constants/routers'
+import 'antd/dist/antd.css'
 import './style.css'
 
 class TodoListContainer extends React.Component {
@@ -23,13 +26,14 @@ class TodoListContainer extends React.Component {
 
   moveTask = id => (event) => {
     const index = this.state.tasks.map(task => task.id).indexOf(id);
+    const iconName = event.currentTarget.firstElementChild.getAttribute("aria-label");
     this.setState(state => {
       const { tasks } = state;
       const movedTasks = [...tasks];
-      if (event.target.innerHTML === '∆' && movedTasks[index - 1]) {
+      if (iconName === 'up-circle' && movedTasks[index - 1]) {
         [movedTasks[index - 1], movedTasks[index]] = [movedTasks[index], movedTasks[index - 1]];
       }
-      if (event.target.innerHTML === '∇' && movedTasks[index + 1]) {
+      if (iconName === 'down-circle' && movedTasks[index + 1]) {
         [movedTasks[index + 1], movedTasks[index]] = [movedTasks[index], movedTasks[index + 1]];
       }
       return {
@@ -38,7 +42,7 @@ class TodoListContainer extends React.Component {
     })
   }
 
-  addTask = (task, messageHeight) => {
+  addTask = (task) => {
     this.setState(state => {
       const { tasks } = state;
       return {
@@ -46,7 +50,6 @@ class TodoListContainer extends React.Component {
           {
             id: Date.now(),
             title: task,
-            height: messageHeight,
           },
           ...tasks,
         ],
@@ -66,15 +69,24 @@ class TodoListContainer extends React.Component {
 
   render() {
     const { tasks } = this.state;
+    const { Header, Content, Footer } = Layout;
     return (
-      <div className='app-container'>
-        <TaskInput addTask={this.addTask} />
-        <TodoList
-          openTask={this.openTask}
-          deleteTask={this.deleteTask}
-          moveTask={this.moveTask}
-          tasks={tasks} />
-      </div>
+      <Layout className="layout">
+        <Header className='header'>
+          <Logo />
+          <TaskInput addTask={this.addTask} />
+        </Header>
+        <Content className="main-content">
+          <div className="site-layout-content">
+            <TodoList
+              openTask={this.openTask}
+              deleteTask={this.deleteTask}
+              moveTask={this.moveTask}
+              tasks={tasks} />
+          </div>
+        </Content>
+        <Footer className='footer'>Ant Design ©2021 ToDoReactApp</Footer>
+      </Layout>
     )
   }
 }

@@ -14,7 +14,6 @@ function TodoList(props) {
           title={task.title}
           key={task.id}
           id={task.id}
-          height={task.height}
         />
       )}
     </div>

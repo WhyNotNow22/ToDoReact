@@ -1,28 +1,40 @@
 .task-input {
+    flex-basis: 80%;
     display:flex;
     justify-content: space-between;
-    height: 45px;
+    align-items: center;
+    padding: 0 3vw;
 }
 
 .add-button {
     flex-basis: 20%;
-    max-height: 45px;
-    text-align: center;
-    font-size: 1.7em;
-    border: 2px solid black;
-    background-color: rgb(7, 138, 0);
-    outline: none;
+    max-height: 40px;
 }
 
-.input-field {
-    flex-basis: 80%;
-    border: 2px solid black;
-    margin-right: 3vw;
-    font-size: 1.7em;
-    max-height: 45px;
-    padding: 0px;
-    outline: none;
+#input-text-area {
+    flex-basis: 75%;
+    max-height: 40px;
+    border: 2px solid #1890ff;
+    line-height: 1.2;
     resize: none;
     overflow: hidden;
 }
 
+@media all and (max-width: 575px) {
+    .task-input {
+        margin-top: 1vh;
+        width: 100%;
+        padding: 0;
+    }
+    .add-button {
+        margin-left: 1vw;
+        width: 100%;
+        height: 20px;
+    }
+    
+    #input-text-area {
+        width: 100%;
+        height: 20px;
+        font-size: 14px;
+    }
+}
