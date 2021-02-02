@@ -10,8 +10,10 @@
     box-shadow: 0.5vh 0.5vw  rgba(0, 21, 41, 0.6);
 }
 
-.title {
-    resize : none;
+.todo-item textarea.title {
+    font-size: 26px;
+    line-height: 1.2;
+    overflow: hidden;
 }
 
 .buttons-container {
@@ -54,11 +56,16 @@
     .todo-item {
         flex-direction: column;
     }
-  
+    
+    .todo-item textarea.title  {
+        font-size: 16px;
+    }
+
     .buttons-container {
         display: flex; 
         justify-content: space-between;
-        width: 30vw;
+        width: 40vw;
+        margin-top: 1vh;
     }
 
     .buttons-container button {
