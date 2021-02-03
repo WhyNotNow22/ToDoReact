@@ -30,7 +30,7 @@ class TodoItemContainer extends React.Component {
   }
 
   render() {
-    const { deleteTask, moveTask, openTask, id} = this.props;
+    const { deleteTask, moveTask, openTask, id, index} = this.props;
     const { textAreaTitle, changeStatus } = this.state;
     return (
       <TodoItem
@@ -42,6 +42,8 @@ class TodoItemContainer extends React.Component {
         moveTask={moveTask}
         changeTask={this.changeTask}
         deleteTask={deleteTask}
+        id={id}
+        indexDnD={index}
       />
     )
   }

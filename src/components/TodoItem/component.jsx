@@ -6,30 +6,48 @@ import {
   CloseCircleOutlined,
   EditOutlined
 } from '@ant-design/icons';
+import { Draggable } from 'react-beautiful-dnd'
 import './style.css'
 
 function TodoItem(props) {
-  const { readOnly, value, onChange, onBlur, moveTask, changeTask, deleteTask, onClick } = props;
+  const { readOnly, value, onChange, onBlur, moveTask, changeTask, deleteTask, onClick, id, indexDnD } = props;
   const { TextArea } = Input;
   return (
-    <div className='todo-item'>
-      <TextArea
-        className='title'
-        autoSize
-        bordered={false}
-        value={value}
-        readOnly={readOnly}
-        onChange={onChange}
-        onBlur={onBlur}
-        onClick={onClick}
-      />
-      <div className='buttons-container'>
-        <Button className='move' icon={<UpCircleOutlined />} onClick={moveTask} />
-        <Button className='change' icon={<EditOutlined />} onClick={changeTask} />
-        <Button className='move' icon={<DownCircleOutlined />} onClick={moveTask} />
-        <Button className='delete' icon={<CloseCircleOutlined />} onClick={deleteTask} />
-      </div>
-    </div>
+    <Draggable
+      disableInteractiveElementBlocking={readOnly}
+      key={id}
+      draggableId={String(id)}
+      index={indexDnD}
+    >
+      {(provided) => {
+        console.log('')
+        return (
+          <div
+            className='todo-item'
+            {...provided.dragHandleProps}
+            {...provided.draggableProps}
+            ref={provided.innerRef}
+          >
+            <TextArea
+              className='title'
+              bordered={false}
+              value={value}
+              readOnly={readOnly}
+              onChange={onChange}
+              onBlur={onBlur}
+              onClick={onClick}
+              autoSize
+            />
+            <div className='buttons-container'>
+              <Button className='move' icon={<UpCircleOutlined />} onClick={moveTask} />
+              <Button className='change' icon={<EditOutlined />} onClick={changeTask} />
+              <Button className='move' icon={<DownCircleOutlined />} onClick={moveTask} />
+              <Button className='delete' icon={<CloseCircleOutlined />} onClick={deleteTask} />
+            </div>
+          </div>
+        )
+      }}
+    </Draggable>
   )
 }
 

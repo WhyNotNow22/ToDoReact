@@ -67,6 +67,19 @@ class TodoListContainer extends React.Component {
     }
   }
 
+  handleOnDragEnd = (result) => {
+    if (!result.destination) return;
+    this.setState(state => {
+      const { tasks } = state;
+      const newTasks = [...tasks];
+      const [reorderedItem] = newTasks.splice(result.source.index, 1);
+      newTasks.splice(result.destination.index, 0, reorderedItem);
+      return {
+        tasks: newTasks,
+      }
+    })
+  }
+
   render() {
     const { tasks } = this.state;
     const { Header, Content, Footer } = Layout;
@@ -82,7 +95,9 @@ class TodoListContainer extends React.Component {
               openTask={this.openTask}
               deleteTask={this.deleteTask}
               moveTask={this.moveTask}
-              tasks={tasks} />
+              dragEnd={this.handleOnDragEnd}
+              tasks={tasks}
+            />
           </div>
         </Content>
         <Footer className='footer'>Ant Design ©2021 ToDoReactApp</Footer>
