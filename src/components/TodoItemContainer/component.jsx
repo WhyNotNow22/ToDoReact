@@ -1,8 +1,12 @@
 import React from 'react'
 import TodoItem from '../TodoItem'
+import { TodoContext } from '../../context/TodoContext'
 import './style.css'
 
 class TodoItemContainer extends React.Component {
+
+  static contextType = TodoContext;
+
   constructor(props) {
     super(props);
     this.state = {
@@ -21,6 +25,11 @@ class TodoItemContainer extends React.Component {
   stopChange = event => {
     event.target.closest('DIV').style.border = '2px solid #001529';
     this.setState({ changeStatus: false });
+    const { tasks } = this.context;
+    const { id } = this.props;
+    const index = tasks.map(task => task.id).indexOf(id);
+    tasks[index].title = this.state.textAreaTitle;
+    this.context.updateState(tasks);
   }
 
   change = event => {
@@ -30,17 +39,14 @@ class TodoItemContainer extends React.Component {
   }
 
   enterPressed = event => {
+    const lineBreakIndex = event.target.selectionStart;
+    const title = this.state.textAreaTitle;
     if (!event.ctrlKey) {
       this.stopChange(event);
     } else {
-      this.setState(state => {
-        return {
-          textAreaTitle: state.textAreaTitle + '\n',
-        }
-      });
+      this.setState({ textAreaTitle: title.slice(0, lineBreakIndex) + '\n' + title.slice(lineBreakIndex) });
     }
   }
-
 
   render() {
     const { deleteTask, moveTask, openTask, id, index } = this.props;

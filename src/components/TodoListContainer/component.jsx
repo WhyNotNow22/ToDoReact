@@ -4,57 +4,41 @@ import TaskInput from '../TaskInput'
 import TodoList from '../TodoList'
 import Logo from '../Logo'
 import { TODO_ITEM_URL } from '../../constants/routers'
+import { TodoContext } from '../../context/TodoContext'
 import 'antd/dist/antd.css'
 import './style.css'
 
 class TodoListContainer extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      tasks: [],
-    };
-  }
+
+  static contextType = TodoContext;
 
   deleteTask = id => () => {
-    this.setState(state => {
-      let { tasks } = state;
-      return {
-        tasks: tasks.filter(task => task.id !== id)
-      };
-    })
+    const { tasks } = this.context;
+    this.context.updateState(tasks.filter(task => task.id !== id));
   }
 
   moveTask = id => (event) => {
-    const index = this.state.tasks.map(task => task.id).indexOf(id);
+    const { tasks } = this.context;
+    const index = tasks.map(task => task.id).indexOf(id);
     const iconName = event.currentTarget.firstElementChild.getAttribute("aria-label");
-    this.setState(state => {
-      const { tasks } = state;
-      const movedTasks = [...tasks];
-      if (iconName === 'up-circle' && movedTasks[index - 1]) {
-        [movedTasks[index - 1], movedTasks[index]] = [movedTasks[index], movedTasks[index - 1]];
-      }
-      if (iconName === 'down-circle' && movedTasks[index + 1]) {
-        [movedTasks[index + 1], movedTasks[index]] = [movedTasks[index], movedTasks[index + 1]];
-      }
-      return {
-        tasks: movedTasks,
-      }
-    })
+    if (iconName === 'up-circle' && tasks[index - 1]) {
+      [tasks[index - 1], tasks[index]] = [tasks[index], tasks[index - 1]];
+    }
+    if (iconName === 'down-circle' && tasks[index + 1]) {
+      [tasks[index + 1], tasks[index]] = [tasks[index], tasks[index + 1]];
+    }
+    this.context.updateState(tasks);
   }
 
   addTask = (task) => {
-    this.setState(state => {
-      const { tasks } = state;
-      return {
-        tasks: [
-          {
-            id: Date.now(),
-            title: task,
-          },
-          ...tasks,
-        ],
-      }
-    })
+    const { tasks } = this.context;
+    this.context.updateState([
+      {
+        id: Date.now(),
+        title: task,
+      },
+      ...tasks,
+    ]);
   }
 
   openTask = (id, title) => (event) => {
@@ -69,19 +53,13 @@ class TodoListContainer extends React.Component {
 
   handleOnDragEnd = (result) => {
     if (!result.destination) return;
-    this.setState(state => {
-      const { tasks } = state;
-      const newTasks = [...tasks];
-      const [reorderedItem] = newTasks.splice(result.source.index, 1);
-      newTasks.splice(result.destination.index, 0, reorderedItem);
-      return {
-        tasks: newTasks,
-      }
-    })
+    const { tasks } = this.context;
+    const [reorderedItem] = tasks.splice(result.source.index, 1);
+    tasks.splice(result.destination.index, 0, reorderedItem);
+    this.context.updateState(tasks);
   }
 
   render() {
-    const { tasks } = this.state;
     const { Header, Content, Footer } = Layout;
     return (
       <Layout className="layout">
@@ -96,7 +74,6 @@ class TodoListContainer extends React.Component {
               deleteTask={this.deleteTask}
               moveTask={this.moveTask}
               dragEnd={this.handleOnDragEnd}
-              tasks={tasks}
             />
           </div>
         </Content>

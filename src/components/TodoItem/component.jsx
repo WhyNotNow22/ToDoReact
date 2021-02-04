@@ -20,7 +20,6 @@ function TodoItem(props) {
       index={indexDnD}
     >
       {(provided) => {
-        console.log('')
         return (
           <div
             className='todo-item'

@@ -11,7 +11,7 @@ class TaskInput extends React.Component {
     };
   }
 
-  addTask = event => {
+  addTask = () => {
     const { input } = this.state;
     const { addTask } = this.props;
     if (input) {
@@ -30,8 +30,10 @@ class TaskInput extends React.Component {
       event.preventDefault();
     } else {
       this.setState(state => {
+        const lineBreakIndex = event.target.selectionStart;
+        const title = state.input;
         return {
-          input: state.input + '\n',
+          input: title.slice(0, lineBreakIndex) + '\n' + title.slice(lineBreakIndex),
         }
       });
     }

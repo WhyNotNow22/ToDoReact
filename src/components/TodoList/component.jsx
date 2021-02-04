@@ -1,11 +1,13 @@
 import React from 'react'
+import { useContext } from 'react';
 import { Droppable, DragDropContext } from 'react-beautiful-dnd'
+import { TodoContext } from '../../context/TodoContext';
 import TodoItemContainer from '../TodoItemContainer'
-
 import './style.css'
 
 function TodoList(props) {
-  const { deleteTask, moveTask, openTask, dragEnd, tasks } = props;
+  const { deleteTask, moveTask, openTask, dragEnd } = props;
+  const { tasks } = useContext(TodoContext);
   return (
     <DragDropContext onDragEnd={dragEnd} >
       <Droppable droppableId='list'>
@@ -31,6 +33,5 @@ function TodoList(props) {
     </DragDropContext>
   )
 }
-
 
 export default TodoList
