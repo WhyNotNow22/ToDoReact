@@ -29,8 +29,21 @@ class TodoItemContainer extends React.Component {
     }
   }
 
+  enterPressed = event => {
+    if (!event.ctrlKey) {
+      this.stopChange(event);
+    } else {
+      this.setState(state => {
+        return {
+          textAreaTitle: state.textAreaTitle + '\n',
+        }
+      });
+    }
+  }
+
+
   render() {
-    const { deleteTask, moveTask, openTask, id, index} = this.props;
+    const { deleteTask, moveTask, openTask, id, index } = this.props;
     const { textAreaTitle, changeStatus } = this.state;
     return (
       <TodoItem
@@ -38,10 +51,11 @@ class TodoItemContainer extends React.Component {
         value={textAreaTitle}
         onChange={this.change}
         onBlur={this.stopChange}
-        onClick={openTask(id ,textAreaTitle)}
+        onClick={openTask(id, textAreaTitle)}
         moveTask={moveTask}
         changeTask={this.changeTask}
         deleteTask={deleteTask}
+        enterPressed={this.enterPressed}
         id={id}
         indexDnD={index}
       />

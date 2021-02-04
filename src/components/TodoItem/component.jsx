@@ -10,7 +10,7 @@ import { Draggable } from 'react-beautiful-dnd'
 import './style.css'
 
 function TodoItem(props) {
-  const { readOnly, value, onChange, onBlur, moveTask, changeTask, deleteTask, onClick, id, indexDnD } = props;
+  const { readOnly, value, onChange, onBlur, moveTask, changeTask, deleteTask, onClick, enterPressed, id, indexDnD } = props;
   const { TextArea } = Input;
   return (
     <Draggable
@@ -36,6 +36,7 @@ function TodoItem(props) {
               onChange={onChange}
               onBlur={onBlur}
               onClick={onClick}
+              onPressEnter={enterPressed}
               autoSize
             />
             <div className='buttons-container'>

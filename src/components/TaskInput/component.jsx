@@ -24,6 +24,19 @@ class TaskInput extends React.Component {
     this.setState({ input: event.target.value });
   }
 
+  enterPressed = event => {
+    if (!event.ctrlKey) {
+      this.addTask();
+      event.preventDefault();
+    } else {
+      this.setState(state => {
+        return {
+          input: state.input + '\n',
+        }
+      });
+    }
+  }
+
   render() {
     const { input } = this.state;
     const { TextArea } = Input;
@@ -35,8 +48,9 @@ class TaskInput extends React.Component {
           size="large"
           value={input}
           onChange={this.inputChange}
+          onPressEnter={this.enterPressed}
         />
-        <Button className='add-button' type="primary" onClick={this.addTask}>Apply</Button>
+        <Button className='add-button' type="primary" onClick={this.addTask} >Apply</Button>
       </div>
     )
   }

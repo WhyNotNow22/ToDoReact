@@ -1,4 +1,4 @@
-.todo-item {
+div.todo-item {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -8,13 +8,14 @@
     border-radius: 10px;
     background-color: rgba(0, 21, 41, 0.1);
     box-shadow: 0.5vh 0.5vw  rgba(0, 21, 41, 0.6);
+    cursor: pointer;
 }
 
 .todo-item textarea.title {
     font-size: 26px;
     line-height: 1.2;
     overflow: hidden;
-    cursor: default;
+    cursor: pointer;
 }
 
 .todo-item textarea.title:focus {
